@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/lesson_menu_send_btn"
+        android:title="@string/send_btn" />
+
+    <item
+        android:id="@+id/lesson_menu_edit_btn"
+        android:title="@string/edit_btn" />
+
+    <item
+        android:id="@+id/lesson_menu_delete_btn"
+        android:title="@string/delete_btn" />
+
+</menu>

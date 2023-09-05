@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SCLink</string>
+    <string name="edit_btn">Изменить</string>
+    <string name="delete_btn">Удалить</string>
+    <string name="upper_week">Верхняя неделя</string>
+    <string name="lower_week">Нижняя неделя</string>
+    <string name="choose_type_of_week">Выберите тип недели</string>
+    <string name="lesson_name">Название предмета:</string>
+    <string name="lesson_link">Ссылка:</string>
+    <string name="lesson_empty_dialog_field">Пожалуйста, убедитесь в правильности имени и ссылки</string>
+    <string name="lesson_screen_toolbar">Предметы</string>
+    <string name="enter_folder_name">Введите название папки</string>
+    <string name="enter_name">Введите имя:</string>
+    <string name="enter_link">Введите ссылку:</string>
+    <string name="enter">Принять</string>
+    <string name="cancel">Отменить</string>
+    <string name="enter_lesson_name">Введите название предмета:</string>
+    <string name="send_lessens_menu_btn">Отправить</string>
+    <string name="choose_day_title">Выберите день:</string>
+    <string name="send_to">Отправить в:</string>
+    <string name="nowhere_to_send">Некуда отправлять!</string>
+    <string name="nothing_to_send">Нечего отправлять!</string>
+    <string name="day_monday">Понедельник</string>
+    <string name="day_tuesday">Вторник</string>
+    <string name="day_wednesday">Среда</string>
+    <string name="day_thursday">Четверг</string>
+    <string name="day_friday">Пятница</string>
+    <string name="day_saturday">Суббота</string>
+    <string name="day_sunday">Воскресенье</string>
+    <string name="send_btn">Отправить</string>
+</resources>

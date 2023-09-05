@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SCLink</string>
+    <string name="edit_btn">Edit</string>
+    <string name="delete_btn">Delete</string>
+    <string name="upper_week">Upper week</string>
+    <string name="lower_week">Lower week</string>
+    <string name="choose_type_of_week">Choose type of week</string>
+    <string name="lesson_name">Lesson name:</string>
+    <string name="lesson_link">Lesson link:</string>
+    <string name="lesson_empty_dialog_field">Make sure that name and link is correct</string>
+    <string name="lesson_screen_toolbar">Lessons</string>
+    <string name="enter_folder_name">Enter folder name:</string>
+    <string name="enter_name">Enter name:</string>
+    <string name="enter_link">Enter link:</string>
+    <string name="enter">Enter</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_lesson_name">Enter lesson name:</string>
+    <string name="send_lessens_menu_btn">Send lessens</string>
+    <string name="choose_day_title">Choose day:</string>
+    <string name="send_to">Send to:</string>
+    <string name="nowhere_to_send">Nowhere to send!</string>
+    <string name="nothing_to_send">Nothing to send!</string>
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+    <string name="send_btn">Send</string>
+</resources>
