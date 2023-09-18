@@ -7,7 +7,7 @@
     android:background="#001021"
     android:orientation="vertical"
     android:theme="@style/Theme.SCLink.FoldersScreen."
-    tools:context=".presentation.ui.foldersActivity.FoldersScreenActivity">
+    tools:context=".presentation.screens.foldersActivity.FoldersScreenActivity">
 
     <CalendarView
         android:id="@+id/calendar"
@@ -71,14 +71,46 @@
             tools:listitem="@layout/folders_item_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddFolder"
+            android:id="@+id/fabExtend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:backgroundTint="@color/grey_blue"
+            android:contentDescription="FAB"
             android:foreground="@drawable/ic_add"
+            android:foregroundGravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCreateFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/grey_blue"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ic_create_folder"
+            android:foregroundGravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/fabExtend"
+            app:layout_constraintEnd_toEndOf="@+id/fabExtend"
+            android:contentDescription="Create Folder" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDownloadExcel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/grey_blue"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ic_file_download"
+            android:foregroundGravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/fabCreateFolder"
+            app:layout_constraintEnd_toEndOf="@+id/fabCreateFolder"
+            android:contentDescription="Download from Excel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

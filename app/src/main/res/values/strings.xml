@@ -17,7 +17,7 @@
     <string name="cancel">Cancel</string>
     <string name="enter_lesson_name">Enter lesson name:</string>
     <string name="send_lessens_menu_btn">Send lessens</string>
-    <string name="choose_day_title">Choose day:</string>
+    <string name="choose_day_title">Choose a day:</string>
     <string name="send_to">Send to:</string>
     <string name="nowhere_to_send">Nowhere to send!</string>
     <string name="nothing_to_send">Nothing to send!</string>

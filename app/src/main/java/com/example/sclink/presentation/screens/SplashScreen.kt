@@ -1,4 +1,4 @@
-package com.example.sclink.presentation.ui
+package com.example.sclink.presentation.screens
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.sclink.R
-import com.example.sclink.presentation.ui.foldersActivity.FoldersScreenActivity
+import com.example.sclink.presentation.screens.foldersActivity.FoldersScreenActivity
 import com.example.sclink.utils.Constants.SPLASH_SCREEN_DELAY_TIME
 
 @SuppressLint("CustomSplashScreen")

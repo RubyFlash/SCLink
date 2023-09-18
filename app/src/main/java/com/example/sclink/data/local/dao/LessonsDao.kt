@@ -1,7 +1,7 @@
 package com.example.sclink.data.local.dao
 
 import androidx.room.*
-import com.example.sclink.data.local.model.LessonEntity
+import com.example.sclink.data.model.LessonEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

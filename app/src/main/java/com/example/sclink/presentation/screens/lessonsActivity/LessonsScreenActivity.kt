@@ -1,4 +1,4 @@
-package com.example.sclink.presentation.ui.lessonsActivity
+package com.example.sclink.presentation.screens.lessonsActivity
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -19,8 +19,8 @@ import androidx.appcompat.widget.Toolbar
 import com.example.sclink.R
 import com.example.sclink.databinding.ActivityLessonsScreenBinding
 import com.example.sclink.domain.model.Lesson
-import com.example.sclink.presentation.ui.adapters.LessonsAdapter
-import com.example.sclink.presentation.ui.adapters.OnLessonMenuItemClickListener
+import com.example.sclink.presentation.adapters.LessonsAdapter
+import com.example.sclink.presentation.adapters.OnLessonMenuItemClickListener
 import com.example.sclink.utils.*
 import com.example.sclink.utils.Constants.DAY_OF_WEEK
 import com.example.sclink.utils.Constants.FOLDER_ID
@@ -59,7 +59,9 @@ class LessonsScreenActivity : AppCompatActivity(), OnLessonMenuItemClickListener
             rvLessons.apply {
                 adapter = lessonsAdapter
                 setHasFixedSize(true)
-                attachFab(fabAddLesson)
+                attachFab(fabAddLesson) {
+
+                }
             }
         }
 
@@ -89,9 +91,9 @@ class LessonsScreenActivity : AppCompatActivity(), OnLessonMenuItemClickListener
         val lessonLink = view.findViewById<EditText>(R.id.lessonDialogEditLink)
 
         if (position != NO_POSITION && lessonList[position].lessonName != "") {
+            lessonsViewModel.changeLessonEditingValue(isEditing = true)
             lessonName.setText(lessonList[position].lessonName)
             lessonLink.setText(lessonList[position].lessonLink)
-            lessonsViewModel.changeLessonEditingValue()
         }
 
         view.findViewById<Button>(R.id.lessonDialogEnterBtn).setOnClickListener {
@@ -124,11 +126,11 @@ class LessonsScreenActivity : AppCompatActivity(), OnLessonMenuItemClickListener
 
         view.findViewById<Button>(R.id.lessonDialogCancelBtn).setOnClickListener {
             when (lessonsViewModel.isLessonEditing.value) {
-                true -> lessonsViewModel.changeLessonEditingValue()
+                true -> lessonsViewModel.changeLessonEditingValue(isEditing = false)
                 else -> dialog.dismiss()
             }
+            dialog.dismiss()
         }
-
         dialog.show()
     }
 
@@ -153,7 +155,7 @@ class LessonsScreenActivity : AppCompatActivity(), OnLessonMenuItemClickListener
                 lessonLink = lessonLink
             )
         )
-        lessonsViewModel.changeLessonEditingValue()
+        lessonsViewModel.changeLessonEditingValue(isEditing = false)
     }
 
     private fun sendSingleLesson(position: Int) {

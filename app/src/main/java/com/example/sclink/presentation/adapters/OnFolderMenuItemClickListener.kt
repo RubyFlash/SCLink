@@ -1,4 +1,4 @@
-package com.example.sclink.presentation.ui.adapters
+package com.example.sclink.presentation.adapters
 
 interface OnFolderMenuItemClickListener {
     fun onFolderDeleteButtonClick(position: Int)

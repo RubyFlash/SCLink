@@ -1,6 +1,6 @@
 package com.example.sclink.data.mapper
 
-import com.example.sclink.data.local.model.LessonEntity
+import com.example.sclink.data.model.LessonEntity
 import com.example.sclink.domain.model.Lesson
 
 fun LessonEntity.toLessons(): Lesson {

@@ -1,6 +1,6 @@
 package com.example.sclink.data.mapper
 
-import com.example.sclink.data.local.model.FolderEntity
+import com.example.sclink.data.model.FolderEntity
 import com.example.sclink.domain.model.Folder
 
 fun FolderEntity.toFolders(): Folder {

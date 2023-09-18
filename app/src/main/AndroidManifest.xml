@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sclink">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -11,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SCLink">
         <activity
-            android:name=".presentation.ui.SplashScreen"
+            android:name=".presentation.screens.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.SCLink.SplashScreen.">
             <intent-filter>
@@ -21,14 +23,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.ui.lessonsActivity.LessonsScreenActivity"
+            android:name=".presentation.screens.lessonsActivity.LessonsScreenActivity"
             android:exported="false"
             android:theme="@style/Theme.SCLink.LessonsScreen."/>
         <activity
-            android:name=".presentation.ui.foldersActivity.FoldersScreenActivity"
+            android:name=".presentation.screens.foldersActivity.FoldersScreenActivity"
             android:exported="false"
             android:theme="@style/Theme.SCLink.FoldersScreen.">
         </activity>
+<!--        <receiver android:name=".presentation.receiver.AlarmReceiver"/>-->
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.sclink.data.local.model
+package com.example.sclink.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.example.sclink.presentation.ui.lessonsActivity
+package com.example.sclink.presentation.screens.lessonsActivity
 
 import androidx.lifecycle.*
 import com.example.sclink.domain.model.Lesson
@@ -16,10 +16,8 @@ class LessonsScreenViewModel @Inject constructor(
     private var _isLessonEditing = MutableLiveData<Boolean>(false)
     val isLessonEditing: LiveData<Boolean> get() = _isLessonEditing
 
-    fun changeLessonEditingValue() {
-        _isLessonEditing.value?.let {
-            _isLessonEditing.value = !it
-        }
+    fun changeLessonEditingValue(isEditing: Boolean) {
+        _isLessonEditing.postValue(isEditing)
     }
 
     fun getLessonsByDayOfWeek(folderId: Int, dayOfWeek: String): LiveData<List<Lesson>> {

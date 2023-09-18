@@ -1,4 +1,4 @@
-package com.example.sclink.presentation.ui.adapters
+package com.example.sclink.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context

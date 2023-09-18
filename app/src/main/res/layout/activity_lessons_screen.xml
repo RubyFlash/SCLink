@@ -42,6 +42,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/grey_blue"
         android:foreground="@drawable/ic_add"
+        android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
