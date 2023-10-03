@@ -11,7 +11,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toDrawable
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sclink.R
 import com.example.sclink.databinding.ActivityFoldersScreenBinding
@@ -26,7 +30,8 @@ import com.example.sclink.utils.Constants.NO_POSITION
 import com.example.sclink.utils.attachFab
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FoldersScreenActivity : AppCompatActivity(), OnFolderMenuItemClickListener,
@@ -38,7 +43,7 @@ class FoldersScreenActivity : AppCompatActivity(), OnFolderMenuItemClickListener
     private val foldersViewModel: FoldersScreenViewModel by viewModels()
     private val foldersAdapter: FoldersAdapter by lazy { FoldersAdapter(this) }
 
-//    private lateinit var currentTypeOfWeek: String
+    private lateinit var currentTypeOfWeek: String
 
     private var onExtendClicked: Boolean = false
 
@@ -80,26 +85,30 @@ class FoldersScreenActivity : AppCompatActivity(), OnFolderMenuItemClickListener
                 adapter = foldersAdapter
                 setHasFixedSize(true)
                 attachFab(fabExtend) { onScrolled ->
-                    if(onExtendClicked) {
+                    if (onExtendClicked) {
                         onExtendFabClicked(onScrolled)
                     }
                 }
             }
         }
-        foldersViewModel.isFabClicked.observe(this, Observer {
+
+        foldersViewModel.isFabClicked.observe(this) {
             onExtendClicked = it
-        })
+        }
 
         foldersViewModel.getAllFolders().observe(this) {
             foldersAdapter.submitList(it)
             folderList = it
         }
 
-//        foldersViewModel.gettTypeOfWeek().observe(this) {
-//            currentTypeOfWeek = it
-//        }
-
-//        binding?.weekTextView?.text = currentTypeOfWeek
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                foldersViewModel.typeOfWeek.collect {
+                    currentTypeOfWeek = it
+                    binding?.weekTextView?.text = currentTypeOfWeek
+                }
+            }
+        }
 
         binding?.fabExtend?.setOnClickListener {
             onExtendFabClicked(clicked = onExtendClicked)
@@ -111,6 +120,10 @@ class FoldersScreenActivity : AppCompatActivity(), OnFolderMenuItemClickListener
 
         binding?.fabDownloadExcel?.setOnClickListener {
             Toast.makeText(this, "Excel", Toast.LENGTH_LONG).show()
+        }
+
+        binding?.notificationBtn?.setOnClickListener {
+            onNotificationBtnClicked(it)
         }
 
         binding?.switchWeekBtn?.setOnClickListener {
@@ -161,23 +174,25 @@ class FoldersScreenActivity : AppCompatActivity(), OnFolderMenuItemClickListener
         }
     }
 
-    private fun onSwitchWeekBtnClicked() {
+    private fun onNotificationBtnClicked(notificationBtn: View) {
+        if (notificationBtn.background.equals(R.drawable.ic_notification_off)) {
+            notificationBtn.background = R.drawable.ic_notification_on.toDrawable()
+            foldersViewModel.setAlarmScheduler(currentTypeOfWeek)
+        } else {
+            notificationBtn.background = R.drawable.ic_notification_off.toDrawable()
+            foldersViewModel.cancelAlarmScheduler()
+        }
+    }
 
-//        if (binding?.weekTextView!!.text.equals(upperWeek)) {
-//            saveTypeOfWeek(lowerWeek)
-//        } else if (binding?.weekTextView!!.text.equals(lowerWeek)) {
-//            saveTypeOfWeek(upperWeek)
-////        } else {
-////            saveTypeOfWeek(upperWeek)
-////        }
-//        }
+    private fun onSwitchWeekBtnClicked() {
+        val upperWeek: String = resources.getString(R.string.upper_week)
+        val lowerWeek: String = resources.getString(R.string.lower_week)
+        val typeOfWeek = if (currentTypeOfWeek == upperWeek) lowerWeek else upperWeek
+        saveTypeOfWeek(typeOfWeek = typeOfWeek)
     }
 
     private fun saveTypeOfWeek(typeOfWeek: String) {
-//        foldersViewModel.setTypeOfWeek(typeOfWeek)
-////        binding?.weekTextView!!.text = typeOfWeek
-////        editor.putString(SHARED_PREFERENCES_WEEK_KEY, typeOfWeek)
-////        editor.apply()
+        foldersViewModel.setTypeOfWeek(typeOfWeek)
     }
 
     private fun showFolderDialog(position: Int) {

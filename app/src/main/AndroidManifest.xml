@@ -31,7 +31,7 @@
             android:exported="false"
             android:theme="@style/Theme.SCLink.FoldersScreen.">
         </activity>
-<!--        <receiver android:name=".presentation.receiver.AlarmReceiver"/>-->
+        <receiver android:name=".alarm_manager.AlarmReceiver"/>
     </application>
 
 </manifest>

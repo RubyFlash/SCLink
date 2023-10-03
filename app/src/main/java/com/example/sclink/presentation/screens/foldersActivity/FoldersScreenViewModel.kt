@@ -1,18 +1,23 @@
 package com.example.sclink.presentation.screens.foldersActivity
 
 import androidx.lifecycle.*
+import com.example.sclink.alarm_manager.AlarmScheduler
 import com.example.sclink.domain.model.Folder
+import com.example.sclink.domain.repository.DataStoreOperations
 import com.example.sclink.domain.repository.FoldersRepository
-import com.example.sclink.domain.repository.WeekTypeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FoldersScreenViewModel @Inject constructor(
     private val foldersRepository: FoldersRepository,
-    private val weekTypeRepository: WeekTypeRepository
+    private val dataStoreOperations: DataStoreOperations,
+    private val alarmScheduler: AlarmScheduler
 ) : ViewModel() {
 
     private val _isFolderEditing = MutableLiveData(false)
@@ -21,13 +26,30 @@ class FoldersScreenViewModel @Inject constructor(
     private val _isFabClicked = MutableLiveData(false)
     val isFabClicked: LiveData<Boolean> get() = _isFabClicked
 
-    private val _typeOfWeek = MutableLiveData("")
-    val typeOfWeek: LiveData<String> get() = _typeOfWeek
+    private val _isNotificationBtnClicked = MutableStateFlow(false)
+    val isNotificationBtnClicked: StateFlow<Boolean> get() = _isNotificationBtnClicked
 
-    fun gettTypeOfWeek() = weekTypeRepository.getTypeOfWeek().asLiveData()
+    private val _typeOfWeek = MutableStateFlow("")
+    val typeOfWeek: StateFlow<String> get() = _typeOfWeek
+
+    init {
+        viewModelScope.launch {
+            dataStoreOperations.getTypeOfWeek().collect { typeOfWeek ->
+                _typeOfWeek.value = typeOfWeek
+            }
+        }
+    }
+
+    fun setAlarmScheduler(typeOfWeek: String) {
+        alarmScheduler.schedule(typeOfWeek = typeOfWeek)
+    }
+
+    fun cancelAlarmScheduler() {
+        alarmScheduler.cancel()
+    }
 
     fun setTypeOfWeek(typeOfWeek: String) = viewModelScope.launch(Dispatchers.IO) {
-        weekTypeRepository.setTypeOfWeek(typeOfWeek = typeOfWeek)
+        dataStoreOperations.setTypeOfWeek(typeOfWeek = typeOfWeek)
     }
 
     fun updateFabClickedValue(clicked: Boolean) {

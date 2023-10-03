@@ -61,18 +61,3 @@ fun RecyclerView.attachFab(fab: FloatingActionButton, action: (Boolean) -> Unit)
         }
     })
 }
-
-fun BroadcastReceiver.goAsync(
-    context: CoroutineContext = EmptyCoroutineContext,
-    block: suspend CoroutineScope.() -> Unit
-) {
-    val pendingResult = goAsync()
-    @OptIn(DelicateCoroutinesApi::class)
-    GlobalScope.launch(context) {
-        try {
-            block()
-        } finally {
-            pendingResult.finish()
-        }
-    }
-}

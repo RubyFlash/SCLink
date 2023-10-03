@@ -29,4 +29,5 @@
     <string name="day_saturday">Суббота</string>
     <string name="day_sunday">Воскресенье</string>
     <string name="send_btn">Отправить</string>
+    <string name="notification_content_text">Сейчас %s</string>
 </resources>

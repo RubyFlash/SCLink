@@ -3,27 +3,30 @@ package com.example.sclink.data.repository
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.sclink.domain.repository.WeekTypeRepository
+import com.example.sclink.R
+import com.example.sclink.domain.repository.DataStoreOperations
+import com.example.sclink.utils.Constants.DATA_STORE_PREFS_NAME
+import com.example.sclink.utils.Constants.ON_REMIND_PREFS_KEY
 import com.example.sclink.utils.Constants.WEEK_TYPE_PREFS_KEY
-import com.example.sclink.utils.Constants.WEEK_TYPE_PREFS_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
-import javax.inject.Inject
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = WEEK_TYPE_PREFS_NAME)
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_PREFS_NAME)
 
-class WeekTypeRepositoryImpl @Inject constructor(
+class DataStoreOperationsImpl(
     private val context: Context
-): WeekTypeRepository {
+): DataStoreOperations {
 
     private object PrefsKey {
         val weekTypeKey = stringPreferencesKey(name = WEEK_TYPE_PREFS_KEY)
+        val onRemindKey = booleanPreferencesKey(name = ON_REMIND_PREFS_KEY)
     }
 
     private val dataStore = context.dataStore
@@ -37,7 +40,7 @@ class WeekTypeRepositoryImpl @Inject constructor(
                     throw exception
                 }
             }.map { preferences ->
-                val weekType = preferences[PrefsKey.weekTypeKey] ?: ""
+                val weekType = preferences[PrefsKey.weekTypeKey] ?: context.getString(R.string.upper_week)
                 weekType
             }
     }
@@ -48,4 +51,20 @@ class WeekTypeRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getNotificationBtnState(): Flow<Boolean> {
+        return dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }.map { preferences ->
+                val notificationBtnState = preferences[PrefsKey.onRemindKey] ?: false
+                notificationBtnState
+            }}
+
+    override suspend fun setNotificationBtnState(onClicked: Boolean) {
+        TODO("Not yet implemented")
+    }
 }

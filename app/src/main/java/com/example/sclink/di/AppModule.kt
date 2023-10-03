@@ -2,9 +2,9 @@ package com.example.sclink.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.sclink.alarm_manager.AlarmScheduler
+import com.example.sclink.alarm_manager.AndroidAlarmScheduler
 import com.example.sclink.data.local.Database
-import com.example.sclink.data.repository.WeekTypeRepositoryImpl
-import com.example.sclink.domain.repository.WeekTypeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,8 +38,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideWeekTypeRepository(@ApplicationContext context: Context) : WeekTypeRepository {
-        return WeekTypeRepositoryImpl(context = context)
+    fun provideAndroidAlarmScheduler(
+        @ApplicationContext
+        context: Context
+    ): AlarmScheduler {
+        return AndroidAlarmScheduler(context = context)
     }
 
 }
