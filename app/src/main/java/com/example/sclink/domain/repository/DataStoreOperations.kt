@@ -7,5 +7,5 @@ interface DataStoreOperations {
     suspend fun setTypeOfWeek(typeOfWeek: String)
 
     fun getNotificationBtnState(): Flow<Boolean>
-    suspend fun setNotificationBtnState(onClicked: Boolean)
+    suspend fun setNotificationBtnState(isClicked: Boolean)
 }
